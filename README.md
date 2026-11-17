@@ -42,3 +42,10 @@ split the tree at an arbitrary point.
 - `vertices()` — iterator over every vertex in the forest.
 - `edges()` — iterator over every edge as an ordered pair `(a, b)` with `a < b`.
   Vertices must be comparable with `<` for this method.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
